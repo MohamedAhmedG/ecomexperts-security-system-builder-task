@@ -34,3 +34,4 @@ EOF
 - Title must be short and descriptive (max 72 chars)
 - Always include at least 2 bullet points describing what changed
 - Never use `git commit -m "message"` single-line format
+- NEVER add Co-authored-by lines or any co-author attribution — ever

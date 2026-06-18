@@ -1,0 +1,36 @@
+---
+description: Git commit message format standard
+alwaysApply: true
+---
+
+# Git Commit Format
+
+Always use this exact format for every git commit:
+
+```bash
+git commit -m "$(cat <<'EOF'
+type: short title here
+
+- detail one
+- detail two
+- detail three
+EOF
+)"
+```
+
+## Commit Types
+
+| type | when to use |
+|------|-------------|
+| `feat` | new feature |
+| `fix` | bug fix |
+| `init` | first commit |
+| `style` | CSS/UI only changes |
+| `refactor` | code improvement, no new feature |
+| `chore` | config or dependency changes |
+
+## Rules
+
+- Title must be short and descriptive (max 72 chars)
+- Always include at least 2 bullet points describing what changed
+- Never use `git commit -m "message"` single-line format

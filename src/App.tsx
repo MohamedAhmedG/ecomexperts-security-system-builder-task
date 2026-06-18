@@ -1,3 +1,10 @@
+import ProductCard from "./common/productCard"
+import "./App.css"
+
 export default function App() {
-	return <div>hi</div>
+	return (
+		<div>
+			<ProductCard />
+		</div>
+	)
 }

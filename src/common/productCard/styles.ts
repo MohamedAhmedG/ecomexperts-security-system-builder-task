@@ -2,13 +2,13 @@ import styled from "styled-components"
 import { colors, fonts, radius, spacing } from "@/styles/tokens"
 
 interface IProductCardStyleProps {
-	isAddedToCart: boolean
+	$isAddedToCart: boolean
 }
 
 export const ProductCardStyle = styled.div<IProductCardStyleProps>`
 	border: 2px solid
-		${({ isAddedToCart }) =>
-			isAddedToCart ? colors.primaryBorder : colors.white};
+		${({ $isAddedToCart }) =>
+			$isAddedToCart ? colors.primaryBorder : colors.white};
 	border-radius: ${radius.md};
 	padding: ${spacing.md};
 	gap: 20px;
@@ -16,6 +16,8 @@ export const ProductCardStyle = styled.div<IProductCardStyleProps>`
 	display: grid;
 	grid-template-columns: 140px 1fr;
 	grid-template-rows: 1fr;
+	height: 100%;
+	background: ${colors.white};
 	@media (max-width: 348px) {
 		grid-template-rows: 1fr 1fr;
 		grid-template-columns: 1fr;
@@ -41,9 +43,9 @@ export const ProductCardStyle = styled.div<IProductCardStyleProps>`
 			}
 
 			img {
-				object-fit: cover;
-				width: 140px;
-				height: 100px;
+				object-fit: contain;
+				width: 100px;
+				height: 140px;
 			}
 		}
 

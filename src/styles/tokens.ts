@@ -16,6 +16,9 @@ export const colors = {
 	fog: "#f0f4f7",
 	steel: "#6f7882",
 	danger: "#d8392b",
+	charcoal: "#484848",
+	void: "#0b0d10",
+	frosted: "#edf4ff",
 } as const
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────

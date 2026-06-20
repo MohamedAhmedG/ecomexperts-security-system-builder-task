@@ -13,12 +13,12 @@ export const ItemPriceStyle = styled.div<IItemPriceStyleProps>`
 
 	font-size: 16px;
 	span {
-		&.priceAfter {
+		&.comparePrice {
 			color: ${({ isFirstStyle }) =>
 				isFirstStyle ? colors.danger : colors.steel};
 			text-decoration: line-through;
 		}
-		&.priceBefore {
+		&.currentPrice {
 			color: ${({ isFirstStyle }) =>
 				isFirstStyle ? colors.steel : colors.primaryAlt};
 		}

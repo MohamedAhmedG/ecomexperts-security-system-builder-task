@@ -6,16 +6,16 @@ import {
 } from "./styles"
 
 interface ProductCounterProps {
+	initialValue?: number
 	min?: number
 	max?: number
-	initialValue?: number
 	onChange?: (value: number) => void
 }
 
 export default function ProductCounter({
-	min = 1,
+	initialValue = 0,
+	min = 0,
 	max = 99,
-	initialValue = 1,
 	onChange,
 }: ProductCounterProps) {
 	const [count, setCount] = useState(initialValue)
@@ -38,7 +38,7 @@ export default function ProductCounter({
 				onClick={decrement}
 				disabled={count <= min}
 				type='button'
-				isFirstStyle
+				$isFirstStyle={true}
 			>
 				−
 			</CounterButtonStyle>
@@ -47,7 +47,7 @@ export default function ProductCounter({
 				onClick={increment}
 				disabled={count >= max}
 				type='button'
-				isFirstStyle
+				$isFirstStyle={true}
 			>
 				+
 			</CounterButtonStyle>

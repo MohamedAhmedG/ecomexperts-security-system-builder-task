@@ -1,18 +1,33 @@
-import type { IProductVariant } from "@/api/products.types"
-import { ProductVariantStyles } from "./styles"
+import { useState } from "react"
+import type { IProductVariant } from "@/types/products.types"
+import { ProductVariantStyles, VariantItemStyle } from "./styles"
 
-type ProductVariantProps = {
+interface ProductVariantProps {
 	variants: IProductVariant[]
+	onSelect?: (variant: IProductVariant) => void
 }
 
-export default function ProductVariant({ variants }: ProductVariantProps) {
+export default function ProductVariant({ variants, onSelect }: ProductVariantProps) {
+	const [selectedId, setSelectedId] = useState(variants[0]?.id ?? "")
+
+	function handleSelect(variant: IProductVariant) {
+		setSelectedId(variant.id)
+		onSelect?.(variant)
+	}
+
 	return (
-		<ProductVariantStyles isActive>
-			{variants?.map((variant) => (
-				<div key={variant.id}>
-					<img src={variant.image} alt={variant.label} />
+		<ProductVariantStyles>
+			{variants.map((variant) => (
+				<VariantItemStyle
+					key={variant.id}
+					$isActive={selectedId === variant.id}
+					onClick={() => handleSelect(variant)}
+				>
+					{variant.image && (
+						<img src={variant.image} alt={variant.label} />
+					)}
 					<span>{variant.label}</span>
-				</div>
+				</VariantItemStyle>
 			))}
 		</ProductVariantStyles>
 	)

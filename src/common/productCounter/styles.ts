@@ -1,8 +1,10 @@
 import styled from "styled-components"
 import { colors, fonts, radius, spacing } from "@/styles/tokens"
+
 interface IProductCounterStyleProps {
-	isFirstStyle: boolean
+	$isFirstStyle: boolean
 }
+
 export const ProductCounterStyle = styled.div`
 	display: flex;
 	gap: ${spacing.sm};
@@ -14,8 +16,8 @@ export const ProductCounterStyle = styled.div`
 `
 
 export const CounterButtonStyle = styled.button<IProductCounterStyleProps>`
-	background: ${({ isFirstStyle }) =>
-		isFirstStyle ? colors.fog : colors.white};
+	background: ${({ $isFirstStyle }) =>
+		$isFirstStyle ? colors.fog : colors.white};
 	border: none;
 	cursor: pointer;
 	color: ${colors.slate};

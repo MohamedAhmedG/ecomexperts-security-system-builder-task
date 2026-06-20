@@ -15,7 +15,7 @@ export interface IProductVariant {
 
 export interface IProduct {
 	id: string
-	stepId: number
+	stepId: 1 | 2 | 3 | 4
 	category: ProductCategory
 	name: string
 	description: string

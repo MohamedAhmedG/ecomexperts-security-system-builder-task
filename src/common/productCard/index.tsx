@@ -1,49 +1,57 @@
+import type { IProduct } from "@/types/products.types"
 import ItemPrice from "../priceSection"
 import ProductCounter from "../productCounter"
 import ProductVariant from "../productVariant"
 import { ProductCardStyle, ProductNameStyle } from "./styles"
+import { useState } from "react"
 
-export default function ProductCard() {
+interface IProductInfo {
+	Product: IProduct
+	onCountChange?: (productId: string, count: number) => void
+}
+
+export default function ProductCard({ Product, onCountChange }: IProductInfo) {
+	const [count, setCount] = useState(0)
+
+	const {
+		badge,
+		image,
+		description,
+		learnMoreUrl,
+		name,
+		compareAtPrice,
+		price,
+		variants,
+	} = Product
+
+	function handleCountChange(value: number) {
+		setCount(value)
+		onCountChange?.(Product.id, value)
+	}
+
 	return (
-		<ProductCardStyle isAddedToCart={true}>
+		<ProductCardStyle $isAddedToCart={count > 0}>
 			<div className='imageContainer'>
-				<div className='badgeContainer'>Save 22%</div>
-				<img src='/images/WyzeCam_v4.svg' alt='Product' />
+				{badge && <div className='badgeContainer'>{badge}</div>}
+				{image && <img src={image} alt={name} />}
 			</div>
 
 			<div className='bodyContainer'>
 				<ProductNameStyle>
-					<p>Wyze Cam v4</p>
+					<p>{name}</p>
 					<p>
-						The clearest Wyze Cam ever made. <a href='#'>Learn More</a>
+						{description}
+						{learnMoreUrl && <a href={learnMoreUrl}> Learn More</a>}
 					</p>
 				</ProductNameStyle>
-				<ProductVariant
-					variants={[
-						{
-							id: "white",
-							image: "/images/WyzeCam_v4_white.svg",
-							label: "white",
-							swatchColor: "white",
-						},
-						{
-							id: "white",
-							image: "/images/WyzeCam_v4_white.svg",
-							label: "white",
-							swatchColor: "white",
-						},
-						{
-							id: "white",
-							image: "/images/WyzeCam_v4_white.svg",
-							label: "white",
-							swatchColor: "white",
-						},
-					]}
-				/>
+
+				{variants && variants.length > 0 && (
+					<ProductVariant variants={variants} />
+				)}
 
 				<div className='footerContainer'>
-					<ProductCounter />
-					<ItemPrice compareAtPrice={35.98} price={69.98} />
+					<ProductCounter onChange={handleCountChange} />
+					<ItemPrice compareAtPrice={compareAtPrice} price={price} />
 				</div>
 			</div>
 		</ProductCardStyle>

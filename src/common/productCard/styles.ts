@@ -18,7 +18,7 @@ export const ProductCardStyle = styled.div<IProductCardStyleProps>`
 	grid-template-rows: 1fr;
 	height: 100%;
 	background: ${colors.white};
-	@media (max-width: 348px) {
+	@media (max-width: 1100px) {
 		grid-template-rows: 1fr 1fr;
 		grid-template-columns: 1fr;
 	}

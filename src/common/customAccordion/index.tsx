@@ -43,7 +43,7 @@ export default function CustomAccordion({ products }: IproductsProps) {
 					<Grid>
 						{stepProducts.map((product) => (
 							<Grid.Col
-								span={{ xs: 12, sm: 6, md: 4 }}
+								span={{ xs: 12, md: 6 }}
 								key={product.id}
 							>
 								<ProductCard

@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useBundleStore } from "@/store/useBundleStore"
 import { productsQueryOptions } from "@/api/products.api"
@@ -30,6 +30,12 @@ const CATEGORY_ORDER: ProductCategory[] = [
 export default function ReviewPanel() {
 	const { data: allProducts } = useSuspenseQuery(productsQueryOptions)
 	const cart = useBundleStore((s) => s.cart)
+	const [savedMsg, setSavedMsg] = useState(false)
+
+	const handleSave = useCallback(() => {
+		setSavedMsg(true)
+		setTimeout(() => setSavedMsg(false), 2500)
+	}, [])
 
 	const productMap = useMemo(() => {
 		const m = new Map<string, { product: Product; image: string }>()
@@ -153,7 +159,9 @@ export default function ReviewPanel() {
 					</div>
 
 					<div className='saveMySystemForLater'>
-						<button type='button'>Save my system for later</button>
+						<button type='button' onClick={handleSave}>
+							{savedMsg ? "✓ System saved!" : "Save my system for later"}
+						</button>
 					</div>
 				</>
 			)}

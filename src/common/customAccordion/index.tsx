@@ -1,7 +1,7 @@
 import { Accordion, Grid } from "@mantine/core"
 import { useState } from "react"
 import StepHeader from "./components/stepHeader"
-import { AccordionWrapper } from "./styles"
+import { AccordionWrapper, NextButton } from "./styles"
 import { STEPS } from "@/constants/steps"
 import type { Product } from "@/types/products.types"
 import { useBundleStore } from "@/store/useBundleStore"
@@ -12,16 +12,18 @@ interface CustomAccordionProps {
 }
 
 export default function CustomAccordion({ products }: CustomAccordionProps) {
-	const [openedValue, setOpenedValue] = useState<string | null>(null)
+	const [openedValue, setOpenedValue] = useState<string | null>("1")
 	const cart = useBundleStore((s) => s.cart)
 
-	const items = STEPS.map((item) => {
+	const items = STEPS.map((item, index) => {
 		const isOpen = openedValue === item.stepId.toString()
 		const stepProducts = products.filter((p) => p.stepId === item.stepId)
+		const nextStep = STEPS[index + 1]
 
 		const selectedCount = stepProducts.reduce((sum, p) => {
 			const hasAny = Object.entries(cart).some(
-				([key, qty]) => qty > 0 && (key === p.id || key.startsWith(`${p.id}::`)),
+				([key, qty]) =>
+					qty > 0 && (key === p.id || key.startsWith(`${p.id}::`)),
 			)
 			return sum + (hasAny ? 1 : 0)
 		}, 0)
@@ -47,6 +49,17 @@ export default function CustomAccordion({ products }: CustomAccordionProps) {
 							</Grid.Col>
 						))}
 					</Grid>
+
+					{nextStep && (
+						<NextButton>
+							<button
+								type='button'
+								onClick={() => setOpenedValue(nextStep.stepId.toString())}
+							>
+								Next: {nextStep.title}
+							</button>
+						</NextButton>
+					)}
 				</Accordion.Panel>
 			</Accordion.Item>
 		)

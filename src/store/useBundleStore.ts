@@ -17,7 +17,12 @@ type BundleStore = BundleState & BundleActions
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
 const DEFAULT_STATE: BundleState = {
-	cart: {},
+	cart: {
+		"plan-01": 1,
+		"sensor-01": 1,
+		"sensor-02": 1,
+		"acc-01": 1,
+	},
 }
 
 // ─── Store ────────────────────────────────────────────────────────────────────

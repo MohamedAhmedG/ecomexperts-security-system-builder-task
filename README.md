@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# Wyze Security System Bundle Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multi-step bundle builder built as a React prototype. Shoppers assemble a custom security system through a 4-step accordion and see a live review panel update in real time as they make selections.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting started
 
-## React Compiler
+**Prerequisites:** Node.js 18+ and npm.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# 1. Install dependencies
+npm install
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 2. Start the dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app runs at `http://localhost:5173` by default.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Build for production
+npm run build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Preview the production build locally
+npm run preview
 ```
+
+---
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build tool | Vite |
+| UI components | Mantine v7 |
+| Styling | styled-components |
+| State management | Zustand with `persist` middleware |
+| Server-state / data fetching | TanStack React Query |
+| Data source | Local JSON file (`src/api/data/products.json`) |
+
+---
+
+## Architecture decisions
+
+**Data source — local JSON, not a backend**
+Products are loaded from a local JSON file via a React Query mock. This keeps the setup self-contained (no server to spin up). Plugging in a real API would only require changing `productsQueryOptions` to point at a fetch URL instead of the imported JSON.
+
+**State management — Zustand with `persist`**
+Cart state lives in a single Zustand store. The `persist` middleware serialises the cart to `localStorage` on every state change, so "Save my system for later" is effectively automatic. The button gives the user explicit confirmation that their system is saved. On first visit (empty `localStorage`), the store seeds a default cart that matches the design's pre-populated review panel (plan, sensors, accessory).
+
+**Cart key scheme — `productId::variantId`**
+Each variant of a product is tracked as an independent line item using a composite key (`lineKey(productId, variantId)`). Switching colour variants on a card shows that variant's own quantity without disturbing the others. The review panel then renders one row per variant that has a count above zero.
+
+**Accordion navigation — controlled state**
+The accordion uses a single piece of React state (`openedValue`). Step 1 opens by default. Each expanded step has a "Next: …" button that advances `openedValue` to the following step, matching the intended UX flow.
+
+**Styling — styled-components + design tokens**
+Design tokens (colors, spacing, radii, fonts) are centralised in `src/styles/tokens.ts`. All component styles consume these tokens, making visual tweaks low-risk and consistent.
+
+---
+
+## What's implemented
+
+- Two-column desktop layout (builder left, review panel right)
+- 4-step accordion — Step 1 open by default, "Next: …" button advances to the next step
+- Step headers: "Step N of 4", icon, title, "N selected" counter, animated chevron
+- Product cards: discount badge, image, title, description, Learn More link, variant picker, quantity stepper, struck-through compare-at price + active price, selected-state highlighted border
+- Variant selection with independent quantities — switching colour never resets other variants
+- Quantity steppers kept in sync between cards and review panel
+- Review panel grouped by category (Cameras, Plan, Sensors, Accessories) with thumbnails, quantity steppers, and per-line pricing
+- Fast Shipping row, satisfaction-guarantee badge, financing line, struck-through pre-discount total, savings callout, Checkout button (placeholder)
+- "Save my system for later" — cart persists automatically to `localStorage`; button shows "✓ System saved!" confirmation
+- Pre-populated default state matching the design mock (plan, sensors, accessory seeded on first visit)
+- Responsive layout down to mobile using Mantine's grid breakpoints
+
+---
+
+## Tradeoffs and known limitations
+
+- **Financing amount is hardcoded** (`as low as $19.19/mo`). A real implementation would divide the total by the number of financing months from a rates API.
+- **Fast Shipping is hardcoded** as a $5.99 → $0 line item. Shipping eligibility rules would come from the backend in production.
+- **No backend / API bonus** — products load from a local JSON file. The data layer is intentionally thin so the focus stays on the UI.
+- **Checkout button is a placeholder** — it has no click handler. The brief says this is acceptable for the prototype.
+- **Responsiveness is grid-level** — columns stack on small viewports, but the review panel does not become a sticky drawer or bottom sheet on mobile. A production build would likely add a collapsed summary bar that expands into a full-screen panel on phones.
+- **Product images for sensors and accessories** are missing from the design assets. Affected products render without an image; the layout handles this gracefully.

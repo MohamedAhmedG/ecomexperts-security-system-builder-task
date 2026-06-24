@@ -32,14 +32,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 	)
 
 	function handleVariantSelect(variant: ProductVariant) {
-		const oldKey = lineKey(product.id, activeVariantId)
-		const newKey = lineKey(product.id, variant.id)
-
-		if (oldKey !== newKey && qty > 0) {
-			setQuantity(oldKey, 0)
-			setQuantity(newKey, qty)
-		}
-
 		setActiveVariantId(variant.id)
 	}
 

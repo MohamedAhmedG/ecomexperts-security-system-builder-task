@@ -1,5 +1,9 @@
 import ArrowIcon from "@/assets/images/icon_arrow.svg?react"
-import { CustomControlStyles, SectionLabelStyle } from "./styles"
+import {
+	CustomControlStyles,
+	SectionLabelStyle,
+	SectionTitleStyle,
+} from "./styles"
 import { Accordion } from "@mantine/core"
 interface ICustomControlProps {
 	isOpen: boolean
@@ -28,15 +32,13 @@ export default function CustomControl({
 						<div className='iconSection'>
 							{icon && <img src={icon} alt='label icon' />}
 						</div>
-						<div className='labelSection'>
-							<span>{label}</span>
-						</div>
+						<SectionTitleStyle>{label}</SectionTitleStyle>
 					</div>
 					<div className='controlSection'>
 						{isSelectedItem && (
 							<span className='selectedSection'>{selectedCount} selected</span>
 						)}
-					<ArrowIcon className='ArrowIconStyle' />
+						<ArrowIcon className='ArrowIconStyle' />
 					</div>
 				</div>
 			</Accordion.Control>

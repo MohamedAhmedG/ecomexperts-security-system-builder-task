@@ -19,6 +19,7 @@ export const colors = {
 	charcoal: "#484848",
 	void: "#0b0d10",
 	frosted: "#edf4ff",
+	ash: "#ced6de",
 } as const
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────

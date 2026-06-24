@@ -1,6 +1,6 @@
 import { colors, fonts } from "@/styles/tokens"
 import styled from "styled-components"
-export { SectionLabelStyle } from "@/styles/common"
+export { SectionLabelStyle, SectionTitleStyle } from "@/styles/common"
 
 interface ICustomControlStylesProps {
 	$isOpen: boolean
@@ -27,12 +27,6 @@ export const CustomControlStyles = styled.div<ICustomControlStylesProps>`
 					width: 26px;
 					height: 26px;
 					object-fit: contain;
-				}
-
-				.labelSection {
-					font-family: ${fonts.semibold};
-					font-size: 22px;
-					color: ${colors.void};
 				}
 			}
 

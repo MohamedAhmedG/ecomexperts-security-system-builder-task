@@ -1,11 +1,21 @@
 import styled from "styled-components"
 import { colors, fonts } from "./tokens"
+interface ISectionLabelStyleProps {
+	$withOutBorder?: boolean
+}
 
-export const SectionLabelStyle = styled.div`
+export const SectionTitleStyle = styled.span`
+	font-family: ${fonts.semibold};
+	font-size: 22px;
+	color: ${colors.void};
+`
+
+export const SectionLabelStyle = styled.div<ISectionLabelStyleProps>`
 	font-family: ${fonts.medium};
 	font-size: 12px;
 	color: ${colors.charcoal};
-	border-bottom: 1px solid ${colors.dark};
+	border-bottom: ${({ $withOutBorder }) =>
+		$withOutBorder ? "none" : `1px solid ${colors.dark}`};
 	padding-inline: 15px;
 	padding-bottom: 5px;
 `

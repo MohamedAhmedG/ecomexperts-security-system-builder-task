@@ -41,9 +41,14 @@ export default function ReviewProductRow({
 					<ProductCounter
 						value={qty}
 						onChange={(next) => setQuantity(lineKey, next)}
+						isFirstStyle={false}
 					/>
 				)}
-				<ProductPrice compareAtPrice={compareAtPrice} price={price} />
+				<ProductPrice
+					compareAtPrice={compareAtPrice}
+					price={price}
+					isReviewStyle
+				/>
 			</div>
 		</ContainerProductStyle>
 	)

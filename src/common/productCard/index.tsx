@@ -71,6 +71,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 					<ProductCounter
 						value={qty}
 						onChange={(next) => setQuantity(currentLineKey, next)}
+						isFirstStyle
 					/>
 					<ProductPrice compareAtPrice={compareAtPrice} price={price} />
 				</div>

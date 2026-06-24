@@ -20,6 +20,7 @@ export const colors = {
 	void: "#0b0d10",
 	frosted: "#edf4ff",
 	ash: "#ced6de",
+	stone: "#a8b2bd",
 } as const
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────

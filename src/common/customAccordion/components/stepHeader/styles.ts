@@ -2,11 +2,11 @@ import { colors, fonts } from "@/styles/tokens"
 import styled from "styled-components"
 export { SectionLabelStyle, SectionTitleStyle } from "@/styles/common"
 
-interface ICustomControlStylesProps {
+interface StepHeaderStylesProps {
 	$isOpen: boolean
 }
 
-export const CustomControlStyles = styled.div<ICustomControlStylesProps>`
+export const StepHeaderStyles = styled.div<StepHeaderStylesProps>`
 	> button {
 		padding: 0;
 
@@ -31,6 +31,10 @@ export const CustomControlStyles = styled.div<ICustomControlStylesProps>`
 			}
 
 			.controlSection {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+
 				.selectedSection {
 					font-family: ${fonts.medium};
 					font-size: 14px;

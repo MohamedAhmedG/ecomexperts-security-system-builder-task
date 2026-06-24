@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { colors, fonts } from "./tokens"
-interface ISectionLabelStyleProps {
+
+interface SectionLabelStyleProps {
 	$withOutBorder?: boolean
 }
 
@@ -10,7 +11,7 @@ export const SectionTitleStyle = styled.span`
 	color: ${colors.void};
 `
 
-export const SectionLabelStyle = styled.div<ISectionLabelStyleProps>`
+export const SectionLabelStyle = styled.div<SectionLabelStyleProps>`
 	font-family: ${fonts.medium};
 	font-size: 12px;
 	color: ${colors.charcoal};

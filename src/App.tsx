@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
 import "./App.css"
 import CustomAccordion from "./common/customAccordion"
-import { productsQueryOptions } from "./api/queries/productsQueries"
+import { productsQueryOptions } from "./api/products.api"
 import { Container, Grid } from "@mantine/core"
 import ReviewPanel from "./common/reviewPanel"
 

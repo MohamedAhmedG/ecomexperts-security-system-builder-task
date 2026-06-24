@@ -1,11 +1,8 @@
 import ArrowIcon from "@/assets/images/icon_arrow.svg?react"
-import {
-	CustomControlStyles,
-	SectionLabelStyle,
-	SectionTitleStyle,
-} from "./styles"
+import { StepHeaderStyles, SectionLabelStyle, SectionTitleStyle } from "./styles"
 import { Accordion } from "@mantine/core"
-interface ICustomControlProps {
+
+interface StepHeaderProps {
 	isOpen: boolean
 	stepNum: string
 	label: string
@@ -13,16 +10,17 @@ interface ICustomControlProps {
 	isSelectedItem: boolean
 	selectedCount: number
 }
-export default function CustomControl({
+
+export default function StepHeader({
 	isOpen,
 	stepNum = "1",
 	label = "",
 	icon = "",
 	isSelectedItem = false,
 	selectedCount = 0,
-}: ICustomControlProps) {
+}: StepHeaderProps) {
 	return (
-		<CustomControlStyles $isOpen={isOpen}>
+		<StepHeaderStyles $isOpen={isOpen}>
 			<Accordion.Control chevron={null}>
 				<SectionLabelStyle>
 					<span>Step {stepNum} of 4</span>
@@ -42,6 +40,6 @@ export default function CustomControl({
 					</div>
 				</div>
 			</Accordion.Control>
-		</CustomControlStyles>
+		</StepHeaderStyles>
 	)
 }

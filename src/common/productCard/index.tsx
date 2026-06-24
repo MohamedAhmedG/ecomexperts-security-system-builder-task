@@ -1,16 +1,16 @@
 import type { IProduct } from "@/types/products.types"
-import ItemPrice from "../priceSection"
+import ItemPrice from "../productPrice"
 import ProductCounter from "../productCounter"
 import ProductVariant from "../productVariant"
 import { ProductCardStyle, ProductNameStyle } from "./styles"
 import { useState } from "react"
 
-interface IProductInfo {
-	Product: IProduct
+interface ProductCardProps {
+	product: IProduct
 	onCountChange?: (productId: string, count: number) => void
 }
 
-export default function ProductCard({ Product, onCountChange }: IProductInfo) {
+export default function ProductCard({ product, onCountChange }: ProductCardProps) {
 	const [count, setCount] = useState(0)
 
 	const {
@@ -22,11 +22,11 @@ export default function ProductCard({ Product, onCountChange }: IProductInfo) {
 		compareAtPrice,
 		price,
 		variants,
-	} = Product
+	} = product
 
 	function handleCountChange(value: number) {
 		setCount(value)
-		onCountChange?.(Product.id, value)
+		onCountChange?.(product.id, value)
 	}
 
 	return (

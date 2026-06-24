@@ -1,16 +1,16 @@
 import { Accordion, Grid } from "@mantine/core"
 import { useState } from "react"
-import CustomControl from "./components/customControl"
+import StepHeader from "./components/stepHeader"
 import { AccordionWrapper } from "./styles"
 import { STEPS } from "@/constants/steps"
 import type { IProduct } from "@/types/products.types"
 import ProductCard from "../productCard"
 
-interface IproductsProps {
+interface CustomAccordionProps {
 	products: IProduct[]
 }
 
-export default function CustomAccordion({ products }: IproductsProps) {
+export default function CustomAccordion({ products }: CustomAccordionProps) {
 	const [openedValue, setOpenedValue] = useState<string | null>(null)
 	const [selectedCounts, setSelectedCounts] = useState<Record<string, number>>({})
 
@@ -31,14 +31,14 @@ export default function CustomAccordion({ products }: IproductsProps) {
 				key={item.stepId.toString()}
 				value={item.stepId.toString()}
 			>
-				<CustomControl
-					isOpen={isOpen}
-					icon={item.icon ?? ""}
-					isSelectedItem={selectedCount > 0}
-					label={item.title}
-					selectedCount={selectedCount}
-					stepNum={item.stepId.toString()}
-				/>
+			<StepHeader
+				isOpen={isOpen}
+				icon={item.icon ?? ""}
+				isSelectedItem={selectedCount > 0}
+				label={item.title}
+				selectedCount={selectedCount}
+				stepNum={item.stepId.toString()}
+			/>
 				<Accordion.Panel>
 					<Grid>
 						{stepProducts.map((product) => (
@@ -46,10 +46,10 @@ export default function CustomAccordion({ products }: IproductsProps) {
 								span={{ xs: 12, md: 6 }}
 								key={product.id}
 							>
-								<ProductCard
-									Product={product}
-									onCountChange={handleCountChange}
-								/>
+							<ProductCard
+								product={product}
+								onCountChange={handleCountChange}
+							/>
 							</Grid.Col>
 						))}
 					</Grid>

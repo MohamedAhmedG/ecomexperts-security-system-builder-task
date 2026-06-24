@@ -1,5 +1,5 @@
 import ArrowIcon from "@/assets/images/icon_arrow.svg?react"
-import { CustomControlStyles } from "./styles.ts"
+import { CustomControlStyles, SectionLabelStyle } from "./styles"
 import { Accordion } from "@mantine/core"
 interface ICustomControlProps {
 	isOpen: boolean
@@ -20,9 +20,9 @@ export default function CustomControl({
 	return (
 		<CustomControlStyles $isOpen={isOpen}>
 			<Accordion.Control chevron={null}>
-				<div className='stepsSection'>
+				<SectionLabelStyle>
 					<span>Step {stepNum} of 4</span>
-				</div>
+				</SectionLabelStyle>
 				<div className='contentBodySection'>
 					<div>
 						<div className='iconSection'>

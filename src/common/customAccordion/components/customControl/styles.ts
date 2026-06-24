@@ -1,5 +1,6 @@
 import { colors, fonts } from "@/styles/tokens"
 import styled from "styled-components"
+export { SectionLabelStyle } from "@/styles/common"
 
 interface ICustomControlStylesProps {
 	$isOpen: boolean
@@ -8,15 +9,6 @@ interface ICustomControlStylesProps {
 export const CustomControlStyles = styled.div<ICustomControlStylesProps>`
 	> button {
 		padding: 0;
-
-		.stepsSection {
-			font-family: ${fonts.medium};
-			font-size: 12px;
-			color: ${colors.charcoal};
-			border-bottom: 1px solid ${colors.dark};
-			padding-inline: 15px;
-			padding-bottom: 5px;
-		}
 
 		.contentBodySection {
 			display: flex;

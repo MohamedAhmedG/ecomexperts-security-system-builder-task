@@ -76,8 +76,11 @@ export const ReviewPanelWrapper = styled.div`
 			font-family: ${fonts.regular};
 		}
 	}
+	.description {
+		border-color: ${colors.ash};
+	}
 
-	.FastShippingSection {
+	.fastShippingSection {
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-start;
@@ -87,7 +90,15 @@ export const ReviewPanelWrapper = styled.div`
 		margin-bottom: 12px;
 	}
 
-	.SatisfactionBadgeSection {
+	.emptyState {
+		text-align: center;
+		padding: 16px 0;
+		color: ${colors.stone};
+		font-size: 14px;
+		font-family: ${fonts.regular};
+	}
+
+	.satisfactionBadgeSection {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -116,7 +127,7 @@ export const ReviewPanelWrapper = styled.div`
 					align-items: center;
 
 					span {
-						background-color: ${colors.primaryAlt};
+						background-color: ${colors.primary};
 						font-size: 12px;
 						font-family: ${fonts.medium};
 						color: ${colors.white};
@@ -141,7 +152,7 @@ export const ReviewPanelWrapper = styled.div`
 						}
 
 						&:last-child {
-							color: ${colors.primaryAlt};
+							color: ${colors.primary};
 							font-size: 24px;
 						}
 					}
@@ -150,7 +161,7 @@ export const ReviewPanelWrapper = styled.div`
 		}
 	}
 
-	.CheckoutButton {
+	.checkoutButton {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
@@ -164,15 +175,16 @@ export const ReviewPanelWrapper = styled.div`
 
 		> button {
 			font-family: ${fonts.semibold};
-			background-color: ${colors.primaryAlt};
+			background-color: ${colors.primary};
 			color: ${colors.white};
 			border: none;
 			border-radius: 4px;
 			padding: 12px 16px;
+			cursor: pointer;
 		}
 	}
 
-	.SaveMySystemForLater {
+	.saveMySystemForLater {
 		text-align: center;
 		margin-top: 12px;
 
@@ -184,6 +196,7 @@ export const ReviewPanelWrapper = styled.div`
 			font-family: ${fonts.regular};
 			text-decoration: underline;
 			font-style: italic;
+			cursor: pointer;
 		}
 	}
 `

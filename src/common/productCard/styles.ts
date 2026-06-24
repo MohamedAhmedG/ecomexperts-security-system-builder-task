@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { colors, fonts, radius, spacing } from "@/styles/tokens"
 
-interface IProductCardStyleProps {
+interface ProductCardStyleProps {
 	$isAddedToCart: boolean
 }
 
-export const ProductCardStyle = styled.div<IProductCardStyleProps>`
+export const ProductCardStyle = styled.div<ProductCardStyleProps>`
 	border: 2px solid
 		${({ $isAddedToCart }) =>
 			$isAddedToCart ? colors.primaryBorder : colors.white};
@@ -36,7 +36,7 @@ export const ProductCardStyle = styled.div<IProductCardStyleProps>`
 				text-align: center;
 				font-family: ${fonts.semibold};
 				font-size: 12px;
-				background-color: ${colors.primaryAlt};
+				background-color: ${colors.primary};
 				border-radius: ${radius.full};
 				color: ${colors.white};
 				padding: 2px 6px;

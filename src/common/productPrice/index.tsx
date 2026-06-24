@@ -1,17 +1,18 @@
-import { ItemPriceStyle } from "./styles"
+import { formatPrice } from "@/lib/utils"
+import { ProductPriceStyle } from "./styles"
 
-interface ItemPriceProps {
+interface ProductPriceProps {
 	price: number
 	compareAtPrice: number
 }
 
-export default function ItemPrice({ price, compareAtPrice }: ItemPriceProps) {
+export default function ProductPrice({ price, compareAtPrice }: ProductPriceProps) {
 	return (
-		<ItemPriceStyle>
-			<span className='comparePrice'>${compareAtPrice.toFixed(2)}</span>
+		<ProductPriceStyle>
+			<span className='comparePrice'>{formatPrice(compareAtPrice)}</span>
 			<span className='currentPrice'>
-				{price === 0 ? "Free" : `$${price.toFixed(2)}`}
+				{price === 0 ? "Free" : formatPrice(price)}
 			</span>
-		</ItemPriceStyle>
+		</ProductPriceStyle>
 	)
 }

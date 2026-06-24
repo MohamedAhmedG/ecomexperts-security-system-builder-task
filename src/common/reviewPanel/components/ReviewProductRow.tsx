@@ -1,35 +1,49 @@
-import ItemPrice from "../../productPrice"
+import { useShallow } from "zustand/react/shallow"
+import { useBundleStore } from "@/store/useBundleStore"
+import ProductPrice from "../../productPrice"
 import ProductCounter from "../../productCounter"
 import { ContainerProductStyle } from "../styles"
 
 interface ReviewProductRowProps {
 	name: string
-	img?: string
+	imageSrc?: string
 	compareAtPrice: number
 	price: number
-	showCounter?: boolean
+	lineKey?: string
 }
 
 export default function ReviewProductRow({
 	name,
 	compareAtPrice,
 	price,
-	showCounter = false,
-	img,
+	lineKey,
+	imageSrc,
 }: ReviewProductRowProps) {
+	const { qty, setQuantity } = useBundleStore(
+		useShallow((s) => ({
+			qty: lineKey !== undefined ? (s.cart[lineKey] ?? 0) : 0,
+			setQuantity: s.setQuantity,
+		})),
+	)
+
 	return (
 		<ContainerProductStyle>
 			<div className='productInfo'>
 				<div className='containerImg'>
-					{img && <img src={img} alt='logo' />}
+					{imageSrc && <img src={imageSrc} alt={name} />}
 				</div>
 				<div className='containerProductName'>
 					<span>{name}</span>
 				</div>
 			</div>
 			<div className='containerCount'>
-				{showCounter && <ProductCounter />}
-				<ItemPrice compareAtPrice={compareAtPrice} price={price} />
+				{lineKey !== undefined && (
+					<ProductCounter
+						value={qty}
+						onChange={(next) => setQuantity(lineKey, next)}
+					/>
+				)}
+				<ProductPrice compareAtPrice={compareAtPrice} price={price} />
 			</div>
 		</ContainerProductStyle>
 	)

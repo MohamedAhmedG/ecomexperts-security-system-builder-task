@@ -1,7 +1,7 @@
 import { colors, fonts } from "@/styles/tokens"
 import styled from "styled-components"
 
-export const ItemPriceStyle = styled.div`
+export const ProductPriceStyle = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -16,7 +16,7 @@ export const ItemPriceStyle = styled.div`
 		}
 
 		&.currentPrice {
-			color: ${colors.primaryAlt};
+			color: ${colors.primary};
 		}
 	}
 `

@@ -7,11 +7,11 @@ export const ProductVariantStyles = styled.div`
 	flex-wrap: wrap;
 `
 
-interface IVariantItemStyleProps {
+interface VariantItemStyleProps {
 	$isActive: boolean
 }
 
-export const VariantItemStyle = styled.div<IVariantItemStyleProps>`
+export const VariantItemStyle = styled.div<VariantItemStyleProps>`
 	border: 1px solid
 		${({ $isActive }) => ($isActive ? colors.mint : colors.silver)};
 	background-color: ${({ $isActive }) =>

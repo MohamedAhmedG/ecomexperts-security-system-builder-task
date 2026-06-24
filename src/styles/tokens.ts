@@ -2,7 +2,6 @@
 
 export const colors = {
 	primary: "#4d2fd2",
-	primaryAlt: "#4e2fd2",
 	primaryBorder: "#4d2fd2b3",
 	white: "#ffffff",
 	link: "#0000ee",

@@ -6,6 +6,7 @@ import {
 } from "./styles"
 
 interface ProductCounterProps {
+	value?: number
 	initialValue?: number
 	min?: number
 	max?: number
@@ -13,42 +14,35 @@ interface ProductCounterProps {
 }
 
 export default function ProductCounter({
+	value,
 	initialValue = 0,
 	min = 0,
 	max = 99,
 	onChange,
 }: ProductCounterProps) {
-	const [count, setCount] = useState(initialValue)
+	const isControlled = value !== undefined
+	const [internalCount, setInternalCount] = useState(initialValue)
+	const count = isControlled ? value : internalCount
 
 	function decrement() {
 		const next = Math.max(min, count - 1)
-		setCount(next)
+		if (!isControlled) setInternalCount(next)
 		onChange?.(next)
 	}
 
 	function increment() {
 		const next = Math.min(max, count + 1)
-		setCount(next)
+		if (!isControlled) setInternalCount(next)
 		onChange?.(next)
 	}
 
 	return (
 		<ProductCounterStyle>
-			<CounterButtonStyle
-				onClick={decrement}
-				disabled={count <= min}
-				type='button'
-				$isFirstStyle={true}
-			>
+			<CounterButtonStyle onClick={decrement} disabled={count <= min} type='button'>
 				−
 			</CounterButtonStyle>
 			<CounterValueStyle>{count}</CounterValueStyle>
-			<CounterButtonStyle
-				onClick={increment}
-				disabled={count >= max}
-				type='button'
-				$isFirstStyle={true}
-			>
+			<CounterButtonStyle onClick={increment} disabled={count >= max} type='button'>
 				+
 			</CounterButtonStyle>
 		</ProductCounterStyle>

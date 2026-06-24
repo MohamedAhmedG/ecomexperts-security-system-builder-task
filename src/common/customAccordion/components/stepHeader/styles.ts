@@ -38,14 +38,14 @@ export const StepHeaderStyles = styled.div<StepHeaderStylesProps>`
 				.selectedSection {
 					font-family: ${fonts.medium};
 					font-size: 14px;
-					color: ${colors.primaryAlt};
+					color: ${colors.primary};
 				}
 
-				.ArrowIconStyle {
-					transform: ${({ $isOpen }) =>
-						$isOpen ? "rotate(180deg)" : "rotate(0deg)"};
-					transition: transform 200ms ease;
-				}
+			.arrowIcon {
+				transform: ${({ $isOpen }) =>
+					$isOpen ? "rotate(180deg)" : "rotate(0deg)"};
+				transition: transform 200ms ease;
+			}
 			}
 		}
 	}

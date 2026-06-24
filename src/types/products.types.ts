@@ -1,10 +1,14 @@
+// ─── Cart ─────────────────────────────────────────────────────────────────────
+
+export type CartState = Record<string, number>
+
 // ─── Product Categories ───────────────────────────────────────────────────────
 
 export type ProductCategory = "cameras" | "plan" | "sensors" | "accessories"
 
 // ─── Variant ─────────────────────────────────────────────────────────────────
 
-export interface IProductVariant {
+export interface ProductVariant {
 	id: string
 	label: string
 	swatchColor: string
@@ -13,7 +17,7 @@ export interface IProductVariant {
 
 // ─── Product ─────────────────────────────────────────────────────────────────
 
-export interface IProduct {
+export interface Product {
 	id: string
 	stepId: 1 | 2 | 3 | 4
 	category: ProductCategory
@@ -24,5 +28,5 @@ export interface IProduct {
 	price: number
 	learnMoreUrl?: string
 	badge?: string
-	variants?: IProductVariant[]
+	variants?: ProductVariant[]
 }

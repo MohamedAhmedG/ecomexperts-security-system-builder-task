@@ -36,7 +36,7 @@ export default function StepHeader({
 						{isSelectedItem && (
 							<span className='selectedSection'>{selectedCount} selected</span>
 						)}
-						<ArrowIcon className='ArrowIconStyle' />
+						<ArrowIcon className='arrowIcon' />
 					</div>
 				</div>
 			</Accordion.Control>

@@ -1,17 +1,24 @@
 import { useState } from "react"
-import type { IProductVariant } from "@/types/products.types"
+import type { ProductVariant } from "@/types/products.types"
 import { ProductVariantStyles, VariantItemStyle } from "./styles"
 
-interface ProductVariantProps {
-	variants: IProductVariant[]
-	onSelect?: (variant: IProductVariant) => void
+interface VariantPickerProps {
+	variants: ProductVariant[]
+	selectedVariantId?: string
+	onSelect?: (variant: ProductVariant) => void
 }
 
-export default function ProductVariant({ variants, onSelect }: ProductVariantProps) {
-	const [selectedId, setSelectedId] = useState(variants[0]?.id ?? "")
+export default function VariantPicker({
+	variants,
+	selectedVariantId,
+	onSelect,
+}: VariantPickerProps) {
+	const isControlled = selectedVariantId !== undefined
+	const [internalId, setInternalId] = useState(variants[0]?.id ?? "")
+	const selectedId = isControlled ? selectedVariantId : internalId
 
-	function handleSelect(variant: IProductVariant) {
-		setSelectedId(variant.id)
+	function handleSelect(variant: ProductVariant) {
+		if (!isControlled) setInternalId(variant.id)
 		onSelect?.(variant)
 	}
 
